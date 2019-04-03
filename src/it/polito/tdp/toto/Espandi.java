@@ -1,10 +1,18 @@
 package it.polito.tdp.toto;
 
+import java.util.*;
+
 public class Espandi {
 	
-	public void espandiPronostico(Pronostico p) {
+	private List<Schedina> soluzioni;
+	
+	public List<Schedina> espandiPronostico(Pronostico p) {
 		Schedina parziale = new Schedina(p.getN()) ;
+		this.soluzioni = new ArrayList();
+
 		espandi(p, parziale, 0) ;
+	
+		return this.soluzioni;
 	}
 	
 	
@@ -14,16 +22,17 @@ public class Espandi {
 	
 	private void espandi(Pronostico p, Schedina parziale, int livello) {
 		
-		// parziale contiene già (livello) valori 
-		//		nelle posizioni 0...livello-1
+		// parziale contiene gia'� (livello) valori 
+		//	nelle posizioni 0...livello-1
 		// io devo determinare parziale[livello]
-		//		(cioè la livello+1 esima riga)
+		//	(cioe' la livello+1 esima riga)
 		// sulla base della previsione in p[livello]
 		
 		
 		if(livello==p.getN()) {
-			System.out.println(parziale) ;
-			return ;
+			//System.out.println(parziale) ;
+			this.soluzioni.add(new Schedina(parziale)); //DOOBIAMO SALVARE UNA COPIA NON SOLO IL RIFERIMENTO A PARZIALE CHE SUBITO DOPO
+			return ;                                    // ANDREMO A CAMBIARE ANDANDO A CANCELLARE IL CONTENUTO PRECEDENTE
 		}
 		
 		
